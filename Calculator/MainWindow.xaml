@@ -1,0 +1,156 @@
+﻿<Window x:Class="Calculator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Calculator"
+        mc:Ignorable="d"
+        Title="Calculator" Height="600" Width="400"
+        Focusable="True"
+        KeyboardNavigation.TabNavigation="None">
+    
+    
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#FFF2DB"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Command" Value="{Binding Path=buttonPressedCommand}"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="20"
+                        Padding="2">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="Cut" Command="{Binding CutCommand}" InputGestureText="Ctrl+X"/>
+                <MenuItem Header="Copy" Command="{Binding CopyCommand}" InputGestureText="Ctrl+C"/>
+                <MenuItem Header="Paste" Command="{Binding PasteCommand}" InputGestureText="Ctrl+V"/>
+                <Separator/>
+                <MenuItem Header="Digit Grouping" IsCheckable="True" IsChecked="{Binding DigitGroupingEnabled}"/>
+            </MenuItem>
+            <MenuItem Header="Help">
+                <MenuItem Header="About" Click="About_Click"/>
+            </MenuItem>
+        </Menu>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+
+            <Grid Grid.Row="0" Background="#FFAB5B">
+
+            </Grid>
+
+            <Grid Grid.Row="1" Background="#FFAB5B">
+
+            </Grid>
+            <TextBlock  Text="{Binding Path=KeyPressedString}"  FontWeight="Bold" TextAlignment="Right" VerticalAlignment="Bottom"
+            HorizontalAlignment="Right"/>
+            <TextBlock  Text="{Binding Path=Entered_Number}" FontSize="50" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontWeight="Bold" Grid.Row="1"/>
+
+
+
+            <Grid Grid.Row="2" Background="#FFAB5B">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.1*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="0.1*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="0.1*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="0.1*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="0.1*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="0.1*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="0.1*"/>
+
+                </Grid.ColumnDefinitions>
+                <Button Grid.Row="0" Grid.Column="1" Content="MC" CommandParameter="MC"/>
+                <Button Grid.Row="0" Grid.Column="3" Content="MR" CommandParameter="MR"/>
+                <Button Grid.Row="0" Grid.Column="5" Content="M+" CommandParameter="M+"/>
+                <Button Grid.Row="0" Grid.Column="7" Content="M-" CommandParameter="M-"/>
+                <Button Grid.Row="0" Grid.Column="9" Content="MS" CommandParameter="MS"/>
+                <Button Grid.Row="0" Grid.Column="11" Content="M^" CommandParameter="M^"/>
+            </Grid>
+            <Grid Grid.Row="3" Background="#FFAB5B">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="0.1*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.1*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="0.1*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="0.1*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="0.1*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="0.1*"/>
+
+                </Grid.ColumnDefinitions>
+                <Button Grid.Row="1" Grid.Column="1" Content="%" CommandParameter="%"/>
+                <Button Grid.Row="1" Grid.Column="3" Content="CE" CommandParameter="ClearEntry"/>
+                <Button Grid.Row="1" Grid.Column="5" Content="C" CommandParameter="Clear"/>
+                <Button Grid.Row="1" Grid.Column="7" Content="Back" CommandParameter="BackSpace"/>
+                <Button Grid.Row="3" Grid.Column="1" Content="1/x" CommandParameter="1/x"/>
+                <Button Grid.Row="3" Grid.Column="3" Content="x²" CommandParameter="Square"/>
+                <Button Grid.Row="3" Grid.Column="5" Content="√" CommandParameter="SquareRoot"/>
+                <Button Grid.Row="3" Grid.Column="7" Content="/" CommandParameter="/"/>
+                <Button Grid.Row="5" Grid.Column="1" Content="7" CommandParameter="7"/>
+                <Button Grid.Row="5" Grid.Column="3" Content="8" CommandParameter="8"/>
+                <Button Grid.Row="5" Grid.Column="5" Content="9" CommandParameter="9"/>
+                <Button Grid.Row="5" Grid.Column="7" Content="*" CommandParameter="*"/>
+                <Button Grid.Row="7" Grid.Column="1" Content="4" CommandParameter="4"/>
+                <Button Grid.Row="7" Grid.Column="3" Content="5" CommandParameter="5"/>
+                <Button Grid.Row="7" Grid.Column="5" Content="6" CommandParameter="6"/>
+                <Button Grid.Row="7" Grid.Column="7" Content="-" CommandParameter="-"/>
+                <Button Grid.Row="9" Grid.Column="1" Content="1" CommandParameter="1"/>
+                <Button Grid.Row="9" Grid.Column="3" Content="2" CommandParameter="2"/>
+                <Button Grid.Row="9" Grid.Column="5" Content="3" CommandParameter="3"/>
+                <Button Grid.Row="9" Grid.Column="7" Content="+" CommandParameter="+"/>
+                <Button Grid.Row="11" Grid.Column="1" Content="+/-" CommandParameter="Negate"/>
+                <Button Grid.Row="11" Grid.Column="3" Content="0" CommandParameter="0"/>
+                <Button Grid.Row="11" Grid.Column="5" Content="." CommandParameter="."/>
+                <Button Grid.Row="11" Grid.Column="7" Content="=" CommandParameter="="/>
+
+            </Grid>
+        </Grid>
+    </DockPanel>
+</Window>
